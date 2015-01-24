@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 	<head>
 		<title>Game</title>
 		<script src="./js/phaser.2.2.2.min.js" type="text/javascript"></script>
@@ -13,15 +13,49 @@
 
 			function preload() {
 
-				game.load.image('badguy', './images/ra_einstein1.png');
+				game.load.image('badguy', './images/badguy.png');
+				game.load.image('ground', './images/ground.png');
 
 			}
 
 			function create() {
+				game.add.sprite(0, 0, 'ground');
+				var bs =[];
+				
+				var text = "老婆";
+				var style = { font: '20px "宋体"', fill: "#000000", align: "center" };
 
-				var bayGuy = new BayGuy(game,200,600);
+				var sayText = game.add.text(300, 250, text, style);
 				
 				
+				var bayGuy1 = new BayGuy(game,160,180,sayText);
+				
+				var bayGuy2 = new BayGuy(game,390,180,sayText);
+				
+				var bayGuy3 = new BayGuy(game,650,180,sayText);
+				
+				var bayGuy4 = new BayGuy(game,160,420,sayText);
+				
+				var bayGuy5 = new BayGuy(game,390,420,sayText);
+				
+				var bayGuy6 = new BayGuy(game,650,420,sayText);
+				
+				
+				
+				
+				bs.push(bayGuy1);
+				bs.push(bayGuy2);
+				bs.push(bayGuy3);
+				bs.push(bayGuy4);
+				bs.push(bayGuy5);
+				bs.push(bayGuy6);
+				
+				setInterval(function(){
+					var index =  Math.floor(Math.random()*7); 
+					
+					bs[index].up();
+					
+				},1000);
 
 			}
 			
