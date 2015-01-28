@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Game</title>
+		<script src="./js/phaser.2.2.2.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="phaser-example"></div>
+		<script>
+			var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create,update : update });
+
+			function preload() {
+
+				//  You can fill the preloader with as many assets as your game requires
+
+				//  Here we are loading an image. The first parameter is the unique
+				//  string by which we'll identify the image later in our code.
+
+				//  The second parameter is the URL of the image (relative)
+				game.load.image('einstein', 'images/ra_einstein1.png');
+
+			}
+
+			function create() {
+
+				//  This creates a simple sprite that is using our loaded image and
+				//  displays it on-screen
+				game.add.sprite(0, 0, 'einstein');
+
+				pic = game.add.sprite(game.world.centerX, 550, 'einstein');
+
+				pic.anchor.setTo(0.5, 1);
+
+				cropRect = new Phaser.Rectangle(0, 0, pic.width, 0);
+
+				//	Here we'll tween the crop rect, from a height of zero to full height, and back again
+				var tween = game.add.tween(cropRect).to( { height: pic.height }, 3000);
+				pic.inputEnabled = true;
+				pic.events.onInputDown.add(listener, cropRect);
+				
+				pic.crop(cropRect);
+
+				tween.start();
+				
+				
+			}
+			function update () {
+
+				pic.updateCrop();
+
+			}
+			
+			function listener(){
+					tween = game.add.tween(cropRect).to( { height: 0 }, 3000);
+					tween.start();
+			}
+		</script>
+	</body>
+</html>
