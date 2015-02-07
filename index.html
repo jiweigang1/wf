@@ -3,6 +3,10 @@
 		<title>Game</title>
 		<script src="./js/phaser.2.2.2.min.js" type="text/javascript"></script>
 		<script src="./js/BadGuy.js" type="text/javascript"></script>
+		<script src="./js/Hammer.js" type="text/javascript"></script>
+		<style>
+			body {cursor:url("./images/mouse.png"), auto}
+		</style>
 	</head>
 	<body>
 		<div id="phaser-example"></div>
@@ -15,11 +19,14 @@
 
 				game.load.image('badguy', './images/badguy.png');
 				game.load.image('ground', './images/ground.png');
+				game.load.spritesheet('hammer', './images/hammer.png', 100, 100, 3);
 
 			}
 
 			function create() {
-				game.add.sprite(0, 0, 'ground');
+				var ground = game.add.sprite(0, 0, 'ground');
+				
+				
 				var bs =[];
 				
 				var text = "老婆";
@@ -49,11 +56,13 @@
 				bs.push(bayGuy4);
 				bs.push(bayGuy5);
 				bs.push(bayGuy6);
-				
+				var hammer = new Hammer(game,40, 100);
 				setInterval(function(){
 					var index =  Math.floor(Math.random()*7); 
+					if(bs[index]){
+						bs[index].up();
+					}
 					
-					bs[index].up();
 					
 				},1000);
 
