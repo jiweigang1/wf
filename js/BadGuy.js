@@ -36,9 +36,11 @@ BayGuy.prototype.update = function() {
 	this.updateCrop();
 };
 
-BayGuy.prototype.onClick=function(){
+BayGuy.prototype.onClick=function(p1,p2){
 	var index =  Math.floor(Math.random()*this._say.length);
 	this._text.setText(this._say[index]);
+	this._text.x = p2.position.x;
+	this._text.y = p2.position.y-20;
 	this._downTween.start();
 }
 
